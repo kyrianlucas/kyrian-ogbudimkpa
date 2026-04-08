@@ -1,32 +1,18 @@
-// CI Pipeline for Kyrian Ogbudimkpa - Build and Test stages
-
 pipeline {
     agent any
-
+ 
     stages {
         stage('Build') {
             steps {
-                echo 'Installing dependencies...'
-                bat 'npm install'
-                echo 'Building the app...'
-                bat 'npm run build'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
-
+ 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                bat 'npm test -- --watchAll=false'
+                sh 'npm test -- --run'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
